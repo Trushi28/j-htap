@@ -1,0 +1,4 @@
+io/jhtap/storage/FinalHTAPVerificationTest.class
+io/jhtap/storage/StoreTest.class
+io/jhtap/storage/LSMTreeCoreTest.class
+io/jhtap/storage/HTAPEngineTest.class
