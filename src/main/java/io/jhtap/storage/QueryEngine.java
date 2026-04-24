@@ -48,33 +48,18 @@ public class QueryEngine {
 
     private long calculateSum(int colIdx, long ts) throws IOException {
         long sum = 0;
-        
-        // HTAP Optimized Path:
-        // 1. Vectorized SIMD scan over all flushed Columnar (.col) files.
-        for (StorageGroup group : store.getStorageGroups()) {
-            if (group.acquire()) {
-                try {
-                    sum += group.getColReader().sum(colIdx);
-                } finally {
-                    group.release();
-                }
+
+        // Analytical queries must respect MVCC visibility rules. A raw scan across
+        // every columnar file double-counts superseded versions, so aggregate over
+        // the snapshot-visible record set first and decode the requested column.
+        for (Record record : store.scan(ts)) {
+            byte[][] fields = record.fields();
+            if (fields == null || colIdx >= fields.length || fields[colIdx] == null || fields[colIdx].length != 8) {
+                continue;
             }
+            sum += ByteBuffer.wrap(fields[colIdx]).getLong();
         }
 
-        // 2. Add records still in MemTable (not yet in columnar format)
-        for (var entry : store.getMemTable().entries()) {
-            Record r = entry.getValue();
-            if (r.timestamp() <= ts && r.type() == Record.RecordType.PUT) {
-                byte[][] fields = r.fields();
-                if (fields != null && colIdx < fields.length && fields[colIdx] != null && fields[colIdx].length == 8) {
-                    sum += ByteBuffer.wrap(fields[colIdx]).getLong();
-                }
-            }
-        }
-        
-        // Note: In a production system, we'd handle deduplication between 
-        // Columnar files and MemTable using a validity bitmap or by only 
-        // summing un-compacted records once.
         return sum;
     }
 }

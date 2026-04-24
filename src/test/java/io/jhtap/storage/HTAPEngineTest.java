@@ -56,4 +56,24 @@ public class HTAPEngineTest {
             assertEquals(50500L, historicalSum);
         }
     }
+
+    @Test
+    public void testSumRespectsDeletesAcrossSnapshots(@TempDir Path tempDir) throws IOException {
+        try (Store store = new Store(tempDir)) {
+            QueryEngine engine = new QueryEngine(store);
+
+            store.put("user1".getBytes(), ByteBuffer.allocate(8).putLong(10).array());
+            store.put("user2".getBytes(), ByteBuffer.allocate(8).putLong(20).array());
+            store.flush();
+
+            long beforeDelete = store.getCurrentTimestamp() - 1;
+            store.delete("user2".getBytes());
+
+            Long currentSum = (Long) engine.execute("SELECT SUM(col0) FROM users");
+            assertEquals(10L, currentSum);
+
+            Long historicalSum = (Long) engine.execute("SELECT SUM(col0) FROM users AS OF " + beforeDelete);
+            assertEquals(30L, historicalSum);
+        }
+    }
 }

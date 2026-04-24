@@ -1,17 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: io.jhtap.storage.HTAPEngineTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.091 s <<< FAILURE! -- in io.jhtap.storage.HTAPEngineTest
-io.jhtap.storage.HTAPEngineTest.testHTAPFullFlow(Path) -- Time elapsed: 0.085 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <50999> but was: <51499>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:635)
-	at io.jhtap.storage.HTAPEngineTest.testHTAPFullFlow(HTAPEngineTest.java:52)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s -- in io.jhtap.storage.HTAPEngineTest

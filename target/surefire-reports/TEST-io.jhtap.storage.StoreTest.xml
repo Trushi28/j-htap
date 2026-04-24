@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.StoreTest" time="0.311" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.StoreTest" time="0.319" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="26"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -11,9 +11,8 @@
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="26"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-26-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423213113382_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-23T21-31-13_231-jvmRun1 surefire-20260423213113382_1tmp surefire_0-20260423213113382_2tmp"/>
+    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424113536630_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-24T11-35-36_468-jvmRun1 surefire-20260424113536630_1tmp surefire_0-20260424113536630_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/Trushi/proj/java/j-htap/target/test-classes:/home/Trushi/proj/java/j-htap/target/classes:/home/Trushi/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/Trushi/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/Trushi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -28,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423213113382_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424113536630_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="26.0.1"/>
     <property name="user.name" value="Trushi"/>
@@ -55,14 +54,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="70.0"/>
   </properties>
-  <testcase name="testCompaction(Path)" classname="io.jhtap.storage.StoreTest" time="0.257">
-    <system-out><![CDATA[21:31:14.451 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5966542890785338878/table-1776960074448.sst and /tmp/junit5966542890785338878/table-1776960074448.col
-21:31:14.516 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5966542890785338878/table-1776960074516.sst and /tmp/junit5966542890785338878/table-1776960074516.col
-21:31:14.522 [main] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 0) into /tmp/junit5966542890785338878/compacted.sst
+  <testcase name="testCompaction(Path)" classname="io.jhtap.storage.StoreTest" time="0.25">
+    <system-out><![CDATA[11:35:37.752 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit8672960084082114880/table-1777010737748.sst and /tmp/junit8672960084082114880/table-1777010737748.col
+11:35:37.811 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit8672960084082114880/table-1777010737811.sst and /tmp/junit8672960084082114880/table-1777010737811.col
+11:35:37.818 [main] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 0) into /tmp/junit8672960084082114880/compacted.sst
 ]]></system-out>
   </testcase>
-  <testcase name="testStoreFlushAndGet(Path)" classname="io.jhtap.storage.StoreTest" time="0.009">
-    <system-out><![CDATA[21:31:14.556 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit2638182919062417421/table-1776960074556.sst and /tmp/junit2638182919062417421/table-1776960074556.col
+  <testcase name="testStoreFlushAndGet(Path)" classname="io.jhtap.storage.StoreTest" time="0.012">
+    <system-out><![CDATA[11:35:37.852 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit1262458827735335717/table-1777010737852.sst and /tmp/junit1262458827735335717/table-1777010737852.col
 ]]></system-out>
   </testcase>
 </testsuite>
