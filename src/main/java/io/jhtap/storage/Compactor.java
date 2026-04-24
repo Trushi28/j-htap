@@ -10,38 +10,36 @@ import java.util.*;
 public class Compactor {
     private static final Logger logger = LoggerFactory.getLogger(Compactor.class);
 
-    public static void compact(Path rootDir, List<Path> sstFiles, Path targetPath, long minRetainTimestamp) throws IOException {
+    public static void compact(Path rootDir, List<StorageGroup> groups, Path targetPath, long minRetainTimestamp) throws IOException {
         logger.info("Starting Streaming Compaction with GC (minRetain: {}) into {}", minRetainTimestamp, targetPath);
         
-        PriorityQueue<SSTableIterator> pq = new PriorityQueue<>((it1, it2) -> {
-            Record r1 = it1.peek();
-            Record r2 = it2.peek();
-            int cmp = Arrays.compare(r1.key(), r2.key());
-            if (cmp != 0) return cmp;
-            return Long.compare(r2.timestamp(), r1.timestamp());
-        });
-        
-        List<SSTableReader> readers = new ArrayList<>();
-        // In a real database, we'd use a special background writer, not a MemTable.
-        // But for this project, a MemTable acting as a merge buffer is fine
-        // as long as we flush it when it gets too big.
-        // Actually, to avoid OOM in compaction, we'll write directly to the writer.
-        
-        SSTableWriter sstWriter = new SSTableWriter(targetPath);
-        String colFilename = targetPath.getFileName().toString().replace(".sst", ".col");
-        ColumnarWriter colWriter = new ColumnarWriter(rootDir.resolve(colFilename));
-        
-        // We'll use a temporary MemTable for the final write phase 
-        // because our Writer implementations take a MemTable.
-        // TO TRULY STREAM: We would need a 'StreamingWriter'.
-        // For the sake of this resume project, I'll use a 'MergeBuffer' MemTable.
-        MemTable mergeBuffer = new MemTable();
+        // Acquire all groups first
+        for (StorageGroup g : groups) {
+            if (!g.acquire()) {
+                throw new IOException("Failed to acquire storage group for compaction");
+            }
+        }
 
         try {
-            for (Path p : sstFiles) {
-                SSTableReader reader = new SSTableReader(p);
-                readers.add(reader);
-                SSTableIterator it = new SSTableIterator(reader);
+            PriorityQueue<SSTableIterator> pq = new PriorityQueue<>((it1, it2) -> {
+                Record r1 = it1.peek();
+                Record r2 = it2.peek();
+                int cmp = Arrays.compare(r1.key(), r2.key());
+                if (cmp != 0) return cmp;
+                return Long.compare(r2.timestamp(), r1.timestamp());
+            });
+            
+            SSTableWriter sstWriter = new SSTableWriter(targetPath);
+            String colFilename = targetPath.getFileName().toString().replace(".sst", ".col");
+            ColumnarWriter colWriter = new ColumnarWriter(rootDir.resolve(colFilename));
+            
+            // Streaming merge buffer. 
+            // TO AVOID OOM: In a full implementation, we would flush this buffer 
+            // periodically or use a StreamingSSTableWriter.
+            MemTable mergeBuffer = new MemTable();
+
+            for (StorageGroup g : groups) {
+                SSTableIterator it = new SSTableIterator(g.getSstReader());
                 if (it.hasNext()) pq.add(it);
             }
 
@@ -63,6 +61,9 @@ public class Compactor {
                     shouldKeep = true;
                 } else {
                     if (!keptLatestVersionOlderThanMin) {
+                        // Keep latest version if it's not a delete, or even if it is a delete
+                        // if we want to ensure tombstones are kept until they are at the bottom level.
+                        // For this demo, we drop tombstones below GC threshold.
                         shouldKeep = r.type() != Record.RecordType.DELETE;
                         keptLatestVersionOlderThanMin = true;
                     } else {
@@ -81,7 +82,9 @@ public class Compactor {
             colWriter.write(mergeBuffer);
 
         } finally {
-            for (SSTableReader r : readers) r.close();
+            for (StorageGroup g : groups) {
+                g.release();
+            }
         }
     }
 

@@ -18,7 +18,22 @@ public class Parser {
             Long asOfTimestamp
     ) {}
 
-    public SelectQuery parse() {
+    public record InsertQuery(
+            String table,
+            String key,
+            List<Long> values
+    ) {}
+
+    public Object parse() {
+        if (peek().type() == Lexer.TokenType.SELECT) {
+            return parseSelect();
+        } else if (peek().type() == Lexer.TokenType.INSERT) {
+            return parseInsert();
+        }
+        throw new RuntimeException("Unexpected token: " + peek().type());
+    }
+
+    private SelectQuery parseSelect() {
         expect(Lexer.TokenType.SELECT);
         boolean selectAll = false;
         Integer sumColIdx = null;
@@ -54,6 +69,25 @@ public class Parser {
         }
 
         return new SelectQuery(selectAll, sumColIdx, table, whereKey, asOf);
+    }
+
+    private InsertQuery parseInsert() {
+        expect(Lexer.TokenType.INSERT);
+        expect(Lexer.TokenType.INTO);
+        String table = expect(Lexer.TokenType.IDENTIFIER).value();
+        expect(Lexer.TokenType.VALUES);
+        expect(Lexer.TokenType.LPAREN);
+        
+        String key = expect(Lexer.TokenType.STRING).value();
+        java.util.List<Long> values = new java.util.ArrayList<>();
+        
+        while (peek().type() == Lexer.TokenType.COMMA) {
+            consume();
+            values.add(Long.parseLong(expect(Lexer.TokenType.NUMBER).value()));
+        }
+        
+        expect(Lexer.TokenType.RPAREN);
+        return new InsertQuery(table, key, values);
     }
 
     private Lexer.Token peek() { return tokens.get(pos); }

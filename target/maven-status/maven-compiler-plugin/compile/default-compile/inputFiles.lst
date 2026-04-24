@@ -1,4 +1,5 @@
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/WriteAheadLog.java
+/home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/Main.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/Store.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/StorageGroup.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/ColumnarWriter.java

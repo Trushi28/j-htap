@@ -48,14 +48,12 @@ public class StoreTest {
             store.put(key2, "v2".getBytes(StandardCharsets.UTF_8));
             store.flush();
             
-            List<Path> ssts = Files.list(tempDir)
-                    .filter(p -> p.toString().endsWith(".sst"))
-                    .collect(Collectors.toList());
-            assertEquals(2, ssts.size());
+            List<StorageGroup> groups = store.getStorageGroups();
+            assertEquals(2, groups.size());
             
             Path target = tempDir.resolve("compacted.sst");
             // No GC in this test (threshold = 0)
-            Compactor.compact(tempDir, ssts, target, 0);
+            Compactor.compact(tempDir, groups, target, 0);
             
             assertTrue(Files.exists(target));
             try (SSTableReader reader = new SSTableReader(target)) {

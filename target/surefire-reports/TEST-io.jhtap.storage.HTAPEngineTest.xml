@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.HTAPEngineTest" time="0.069" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.HTAPEngineTest" time="0.091" tests="1" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="26"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-26-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423203631905_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-23T20-36-31_740-jvmRun1 surefire-20260423203631905_1tmp surefire_0-20260423203631905_2tmp"/>
+    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423213113382_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-23T21-31-13_231-jvmRun1 surefire-20260423213113382_1tmp surefire_0-20260423213113382_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/Trushi/proj/java/j-htap/target/test-classes:/home/Trushi/proj/java/j-htap/target/classes:/home/Trushi/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/Trushi/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/Trushi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423203631905_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260423213113382_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="26.0.1"/>
     <property name="user.name" value="Trushi"/>
@@ -55,8 +55,20 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="70.0"/>
   </properties>
-  <testcase name="testHTAPFullFlow(Path)" classname="io.jhtap.storage.HTAPEngineTest" time="0.065">
-    <system-out><![CDATA[20:36:34.220 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit10341302730893957043/table-1776956794220.sst and /tmp/junit10341302730893957043/table-1776956794220.col
+  <testcase name="testHTAPFullFlow(Path)" classname="io.jhtap.storage.HTAPEngineTest" time="0.085">
+    <failure message="expected: &lt;50999&gt; but was: &lt;51499&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <50999> but was: <51499>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:635)
+	at io.jhtap.storage.HTAPEngineTest.testHTAPFullFlow(HTAPEngineTest.java:52)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+]]></failure>
+    <system-out><![CDATA[21:31:15.646 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5903240147203897729/table-1776960075646.sst and /tmp/junit5903240147203897729/table-1776960075646.col
 ]]></system-out>
   </testcase>
 </testsuite>

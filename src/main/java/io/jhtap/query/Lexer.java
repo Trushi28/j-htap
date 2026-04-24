@@ -8,14 +8,15 @@ import java.util.regex.Pattern;
 public class Lexer {
     public enum TokenType {
         SELECT, FROM, WHERE, AS, OF, SUM, KEY,
-        ASTERISK, LPAREN, RPAREN, EQUALS,
+        INSERT, INTO, VALUES,
+        ASTERISK, LPAREN, RPAREN, EQUALS, COMMA,
         IDENTIFIER, STRING, NUMBER, EOF
     }
 
     public record Token(TokenType type, String value) {}
 
     private static final Pattern TOKEN_PATTERN = Pattern.compile(
-            "\\s*(?:(SELECT|FROM|WHERE|AS|OF|SUM|KEY)|(\\*)|(\\()|(\\))|(=)|([a-zA-Z_][a-zA-Z0-9_]*)|'([^']*)'|(\\d+))",
+            "\\s*(?:(SELECT|FROM|WHERE|AS|OF|SUM|KEY|INSERT|INTO|VALUES)|(\\*)|(\\()|(\\))|(=)|(,)|([a-zA-Z_][a-zA-Z0-9_]*)|'([^']*)'|(\\d+))",
             Pattern.CASE_INSENSITIVE
     );
 
@@ -35,9 +36,10 @@ public class Lexer {
             else if (matcher.group(3) != null) tokens.add(new Token(TokenType.LPAREN, "("));
             else if (matcher.group(4) != null) tokens.add(new Token(TokenType.RPAREN, ")"));
             else if (matcher.group(5) != null) tokens.add(new Token(TokenType.EQUALS, "="));
-            else if (matcher.group(6) != null) tokens.add(new Token(TokenType.IDENTIFIER, matcher.group(6)));
-            else if (matcher.group(7) != null) tokens.add(new Token(TokenType.STRING, matcher.group(7)));
-            else if (matcher.group(8) != null) tokens.add(new Token(TokenType.NUMBER, matcher.group(8)));
+            else if (matcher.group(6) != null) tokens.add(new Token(TokenType.COMMA, ","));
+            else if (matcher.group(7) != null) tokens.add(new Token(TokenType.IDENTIFIER, matcher.group(7)));
+            else if (matcher.group(8) != null) tokens.add(new Token(TokenType.STRING, matcher.group(8)));
+            else if (matcher.group(9) != null) tokens.add(new Token(TokenType.NUMBER, matcher.group(9)));
             pos = matcher.end();
         }
         tokens.add(new Token(TokenType.EOF, ""));

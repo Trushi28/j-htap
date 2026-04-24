@@ -63,11 +63,11 @@ public class FinalHTAPVerificationTest {
             // and we just wrote these, they might still be there.
             
             // Let's force a compaction call with a current timestamp to verify GC logic
-            List<Path> ssts = store.getStorageGroups().stream().map(StorageGroup::getSstPath).toList();
+            List<StorageGroup> groups = store.getStorageGroups();
             Path target = tempDir.resolve("manual-compact.sst");
             
             // GC everything older than "now"
-            Compactor.compact(tempDir, ssts, target, store.getCurrentTimestamp() + 100);
+            Compactor.compact(tempDir, groups, target, store.getCurrentTimestamp() + 100);
             
             try (SSTableReader reader = new SSTableReader(target)) {
                 var it = reader.allRecordsIterator();

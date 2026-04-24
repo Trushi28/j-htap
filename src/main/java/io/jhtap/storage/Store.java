@@ -115,6 +115,10 @@ public class Store implements AutoCloseable {
         return storageGroups;
     }
 
+    public MemTable getMemTable() {
+        return memTable;
+    }
+
     public synchronized void flush() throws IOException {
         if (memTable.isEmpty()) return;
 
@@ -204,11 +208,10 @@ public class Store implements AutoCloseable {
                         List<StorageGroup> toMerge = new ArrayList<>();
                         for (int i = 0; i < 3; i++) toMerge.add(storageGroups.get(i));
                         
-                        List<Path> sstFiles = toMerge.stream().map(StorageGroup::getSstPath).collect(Collectors.toList());
                         Path target = rootDir.resolve("compacted-" + System.currentTimeMillis() + ".sst");
 
                         long gcThreshold = nextTimestamp.get() - 5000;
-                        Compactor.compact(rootDir, sstFiles, target, gcThreshold);
+                        Compactor.compact(rootDir, toMerge, target, gcThreshold);
                         
                         StorageGroup merged = new StorageGroup(target, rootDir.resolve(target.getFileName().toString().replace(".sst", ".col")));
                         
