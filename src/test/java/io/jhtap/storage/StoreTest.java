@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,10 +43,10 @@ public class StoreTest {
             byte[] key1 = "a".getBytes(StandardCharsets.UTF_8);
             byte[] key2 = "b".getBytes(StandardCharsets.UTF_8);
             
-            store.put(key1, "v1".getBytes(StandardCharsets.UTF_8));
+            store.put(key1, ByteBuffer.allocate(8).putLong(10L).array());
             store.flush();
             
-            store.put(key2, "v2".getBytes(StandardCharsets.UTF_8));
+            store.put(key2, ByteBuffer.allocate(8).putLong(20L).array());
             store.flush();
             
             List<StorageGroup> groups = store.getStorageGroups();
@@ -56,12 +57,17 @@ public class StoreTest {
             Compactor.compact(tempDir, groups, target, 0);
             
             assertTrue(Files.exists(target));
+            Path colPath = tempDir.resolve("compacted.col");
+            assertTrue(Files.exists(colPath));
             try (SSTableReader reader = new SSTableReader(target)) {
                 Record r1 = reader.get(key1, store.getCurrentTimestamp());
-                assertArrayEquals("v1".getBytes(StandardCharsets.UTF_8), r1.value());
+                assertEquals(10L, ByteBuffer.wrap(r1.value()).getLong());
                 
                 Record r2 = reader.get(key2, store.getCurrentTimestamp());
-                assertArrayEquals("v2".getBytes(StandardCharsets.UTF_8), r2.value());
+                assertEquals(20L, ByteBuffer.wrap(r2.value()).getLong());
+            }
+            try (ColumnarReader reader = new ColumnarReader(colPath)) {
+                assertEquals(30L, reader.sum(0));
             }
         }
     }

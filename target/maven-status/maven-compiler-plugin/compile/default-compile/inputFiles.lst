@@ -1,3 +1,4 @@
+/home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/StreamingSSTableWriter.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/WriteAheadLog.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/Main.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/Store.java
@@ -5,6 +6,7 @@
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/ColumnarWriter.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/ColumnarBlock.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/QueryEngine.java
+/home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/StreamingColumnarWriter.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/Compactor.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/InternalKey.java
 /home/Trushi/proj/java/j-htap/src/main/java/io/jhtap/storage/Record.java

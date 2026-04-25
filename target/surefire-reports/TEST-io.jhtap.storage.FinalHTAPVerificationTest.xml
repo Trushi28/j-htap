@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.FinalHTAPVerificationTest" time="1.038" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.jhtap.storage.FinalHTAPVerificationTest" time="1.035" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="26"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="java.vm.specification.version" value="26"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-26-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424113536630_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-24T11-35-36_468-jvmRun1 surefire-20260424113536630_1tmp surefire_0-20260424113536630_2tmp"/>
+    <property name="sun.java.command" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424160914952_3.jar /home/Trushi/proj/java/j-htap/target/surefire 2026-04-24T16-09-14_722-jvmRun1 surefire-20260424160914952_1tmp surefire_0-20260424160914952_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/Trushi/proj/java/j-htap/target/test-classes:/home/Trushi/proj/java/j-htap/target/classes:/home/Trushi/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/home/Trushi/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/home/Trushi/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/home/Trushi/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/Trushi/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/home/Trushi/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424113536630_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/Trushi/proj/java/j-htap/target/surefire/surefirebooter-20260424160914952_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="26.0.1"/>
     <property name="user.name" value="Trushi"/>
@@ -55,18 +55,18 @@
     <property name="java.class.version" value="70.0"/>
   </properties>
   <testcase name="testBackgroundCompactionAndGC(Path)" classname="io.jhtap.storage.FinalHTAPVerificationTest" time="1.02">
-    <system-out><![CDATA[11:35:37.882 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5006108990670183182/table-1777010737882.sst and /tmp/junit5006108990670183182/table-1777010737882.col
-11:35:37.885 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5006108990670183182/table-1777010737885.sst and /tmp/junit5006108990670183182/table-1777010737885.col
-11:35:37.887 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5006108990670183182/table-1777010737887.sst and /tmp/junit5006108990670183182/table-1777010737887.col
-11:35:37.889 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit5006108990670183182/table-1777010737889.sst and /tmp/junit5006108990670183182/table-1777010737889.col
-11:35:38.882 [Compaction-Daemon] INFO io.jhtap.storage.Store -- Triggering Background Compaction (Groups: 4)
-11:35:38.883 [Compaction-Daemon] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 1777010732885) into /tmp/junit5006108990670183182/compacted-1777010738883.sst
-11:35:38.886 [Compaction-Daemon] INFO io.jhtap.storage.Store -- Compaction Complete. New Group: compacted-1777010738883.sst
-11:35:38.893 [main] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 1777010737985) into /tmp/junit5006108990670183182/manual-compact.sst
+    <system-out><![CDATA[16:09:16.364 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit10695000989581020338/table-1777027156364.sst and /tmp/junit10695000989581020338/table-1777027156364.col
+16:09:16.367 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit10695000989581020338/table-1777027156367.sst and /tmp/junit10695000989581020338/table-1777027156367.col
+16:09:16.370 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit10695000989581020338/table-1777027156370.sst and /tmp/junit10695000989581020338/table-1777027156370.col
+16:09:16.373 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit10695000989581020338/table-1777027156373.sst and /tmp/junit10695000989581020338/table-1777027156373.col
+16:09:17.363 [Compaction-Daemon] INFO io.jhtap.storage.Store -- Triggering Background Compaction (Groups: 4)
+16:09:17.364 [Compaction-Daemon] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 1777027151365) into /tmp/junit10695000989581020338/compacted-1777027157364.sst
+16:09:17.367 [Compaction-Daemon] INFO io.jhtap.storage.Store -- Compaction Complete. New Group: compacted-1777027157364.sst
+16:09:17.375 [main] INFO io.jhtap.storage.Compactor -- Starting Streaming Compaction with GC (minRetain: 1777027156465) into /tmp/junit10695000989581020338/manual-compact.sst
 ]]></system-out>
   </testcase>
-  <testcase name="testASTQueryParser(Path)" classname="io.jhtap.storage.FinalHTAPVerificationTest" time="0.013">
-    <system-out><![CDATA[11:35:38.904 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit386043328425143728/table-1777010738904.sst and /tmp/junit386043328425143728/table-1777010738904.col
+  <testcase name="testASTQueryParser(Path)" classname="io.jhtap.storage.FinalHTAPVerificationTest" time="0.011">
+    <system-out><![CDATA[16:09:17.384 [main] INFO io.jhtap.storage.Store -- Flushing MemTable to /tmp/junit15618286889098479520/table-1777027157384.sst and /tmp/junit15618286889098479520/table-1777027157384.col
 ]]></system-out>
   </testcase>
 </testsuite>

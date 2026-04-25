@@ -3,6 +3,10 @@ io/jhtap/storage/StorageGroup.class
 io/jhtap/storage/SSTableReader$1.class
 io/jhtap/storage/Record$RecordType.class
 io/jhtap/storage/Store$CompactionThread.class
+io/jhtap/storage/SSTableReader$IndexedRecord.class
+io/jhtap/storage/QueryEngine$AggregateSource.class
+io/jhtap/storage/StreamingSSTableWriter.class
+io/jhtap/storage/StreamingColumnarWriter.class
 io/jhtap/storage/ColumnarBlock.class
 io/jhtap/storage/ColumnarReader.class
 io/jhtap/storage/Store.class
@@ -14,6 +18,7 @@ io/jhtap/query/Parser$SelectQuery.class
 io/jhtap/query/Lexer$Token.class
 io/jhtap/storage/Compactor$SSTableIterator.class
 io/jhtap/storage/SSTableReader$IndexEntry.class
+io/jhtap/storage/SSTableReader$2.class
 io/jhtap/storage/MemTable.class
 io/jhtap/storage/Record.class
 io/jhtap/query/Parser.class

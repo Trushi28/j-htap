@@ -20,6 +20,7 @@ public class SSTableReader implements AutoCloseable {
     private final long dataEnd;
 
     public record IndexEntry(byte[] key, long offset) {}
+    public record IndexedRecord(Record record, int putRowIndex) {}
     private final List<IndexEntry> index = new ArrayList<>();
 
     public SSTableReader(Path path) throws IOException {
@@ -142,6 +143,25 @@ public class SSTableReader implements AutoCloseable {
                 Record r = nextRec;
                 nextRec = null;
                 return r;
+            }
+        };
+    }
+
+    public Iterator<IndexedRecord> allRecordsWithPositionsIterator() {
+        return new Iterator<>() {
+            private final Iterator<Record> delegate = allRecordsIterator();
+            private int nextPutRowIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return delegate.hasNext();
+            }
+
+            @Override
+            public IndexedRecord next() {
+                Record record = delegate.next();
+                int putRowIndex = record.type() == Record.RecordType.PUT ? nextPutRowIndex++ : -1;
+                return new IndexedRecord(record, putRowIndex);
             }
         };
     }

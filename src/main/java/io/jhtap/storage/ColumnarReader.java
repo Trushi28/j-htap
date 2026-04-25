@@ -61,6 +61,14 @@ public class ColumnarReader implements AutoCloseable {
         return sum;
     }
 
+    public long readLong(int colIdx, int rowIdx) {
+        if (colIdx < 0 || colIdx >= numCols || rowIdx < 0 || rowIdx >= numRecords) {
+            return 0L;
+        }
+        int startOffset = 8 + colIdx * numRecords * 8;
+        return mappedData.getLong(startOffset + rowIdx * 8);
+    }
+
     public int countGreaterThan(int colIdx, long threshold) {
         if (colIdx >= numCols) return 0;
         int startOffset = 8 + colIdx * numRecords * 8;
